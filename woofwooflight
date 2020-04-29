@@ -1,0 +1,41 @@
+
+const int pressurePin =  A0; 
+int pinState = 0;  
+#define RELAY1  4 
+int counter = 0;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(pressurePin, INPUT);
+  pinMode(RELAY1, OUTPUT); 
+
+}
+
+void loop()
+{
+  pinState = analogRead(pressurePin);
+
+
+  if ( pinState < 1000 ) {
+    Serial.println("pin state is ");
+    Serial.println(pinState);
+    counter = 0;
+    Serial.println("counter is ");
+    Serial.println(counter);
+    
+  } else {
+    Serial.println("pin state is ");
+    Serial.println(pinState);
+    ++counter;
+    Serial.println("counter is ");
+    Serial.println(counter);
+  }
+
+  if ( counter >= 10 ) {
+    digitalWrite(RELAY1,1);           // Turns ON Relay 1
+  } else {
+    digitalWrite(RELAY1,0);           // Turns OFF Relay 1
+  }
+
+  delay(1000);
+}
